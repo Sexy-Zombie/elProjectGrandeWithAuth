@@ -188,5 +188,14 @@ namespace WarThunderForum.Services
             return selectedComment;
 
         }
+
+
+        public async Task<List<Post>> SearchPostsByWord(string word)
+        {
+            var selectedPosts = await _context.Posts.Where(p => p.Content.Contains(word)).ToListAsync();
+
+            return selectedPosts;
+        }
+
     }
 }

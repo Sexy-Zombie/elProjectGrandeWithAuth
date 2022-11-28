@@ -108,5 +108,11 @@ namespace WarThunderForum.Controllers
             return await _service.GetCommentById(id);
         }
 
+        [HttpGet("{word}")]
+        [Route("[controller]/getPosts/{word}")]
+        public async Task<List<Post>> SearchPostsByWord(string word)
+        {
+            return await _service.SearchPostsByWord(word);
+        }
     }
 }

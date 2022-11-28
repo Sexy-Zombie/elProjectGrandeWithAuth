@@ -192,7 +192,8 @@ namespace WarThunderForum.Services
 
         public async Task<List<Post>> SearchPostsByWord(string word)
         {
-            var selectedPosts = await _context.Posts.Where(p => p.Content.Contains(word)).ToListAsync();
+            var selectedPosts = await _context.Posts.Where(p => p.Content.Contains(word))
+                .Include(p => p.CommentList).ToListAsync();
 
             return selectedPosts;
         }

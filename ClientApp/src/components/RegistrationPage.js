@@ -16,17 +16,17 @@ export function RegistrationPage() {
     }
 
     function registrateUser() {
-        let userName = document.querySelector("#username").value;
+        let username = document.querySelector("#username").value;
         let email = document.querySelector("#email").value;
         let password = document.querySelector("#password").value;
 
         let data = {
-            Username: userName,
             Email: email,
-            Password: password,
-            Id: 0
-        }
-        apiPost(`${baseUrl}api/addUser`, data)
+            Username: username,
+            Password: password
+        };
+
+        apiPost(`${baseUrl}Account/createUser`, data)
 
         navigate('/login');
     }

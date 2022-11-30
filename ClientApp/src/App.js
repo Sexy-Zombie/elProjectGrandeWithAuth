@@ -10,7 +10,7 @@ import { LoginPage } from './components/LoginPage';
 function App() {
     const [userLoggedIn, setUserLoggedIn] = useState(false)
     useEffect(() => {
-        if (sessionStorage.getItem("name")) setUserLoggedIn(true)
+        if (localStorage.getItem("jwt")) setUserLoggedIn(true)
     })
     return (
         <div>
@@ -19,7 +19,7 @@ function App() {
                     <Routes>
                         <Route
                             path="/"
-                            element={<HomeComponent />}
+                            element={<HomeComponent {...{ userLoggedIn, setUserLoggedIn }} />}
                         />
                 
                         <Route

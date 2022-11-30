@@ -8,7 +8,7 @@ import { apiPost } from './ApiPost';
 import { } from './Token';
 
 
-export function HomeComponent() {
+export function HomeComponent(props) {
 
     const [posts, setPosts] = useState([]);
 
@@ -67,17 +67,6 @@ export function HomeComponent() {
         getAllPosts();
     }
 
-    /*async function apiPost(url, payload) {
-        let data = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        return await data.json()
-    }*/
-
     function getUsername() {
         if (sessionStorage.getItem("name")) {
             return (
@@ -85,40 +74,64 @@ export function HomeComponent() {
                 )
         }
     }
+    if (props.userLoggedIn) {
+        return (
+            <div className="page-content cursor_shape">
+                <div className="title">
+                    <h1>War Thunder Forum</h1>
+                </div>
+                {SearchComponent(getAllPosts)}
+                <div className="add-post-block">
+                    {getUsername()}
+                    <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
+                </div>
+                <div id="forAllPosts">
+                    {posts.map(post =>
+                        <div key={post.id} className="card post" data-id={post.id}>
+                            <h2> {post.title} </h2>
+                            <h3> {post.content} </h3>
+                            <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
+                            <div className="like-buttons">
+                                <button className="add-like-btn" type="button" onClick={() => AddLikeToPost(post.id)} >Like</button>
+                                <button className="add-dislike-btn" type="button" onClick={() => AddDislikeToPost(post.id)} >Dislike</button>
+                            </div>
+                            <div className="comment-input">
+                                <input type="text" className="comment-text" placeholder="Write a new comment:" data-id={"comment-to-" + post.id} />
+                            </div>
 
-    return (
-        <div className="page-content cursor_shape">
-            <div className="title">
-                <h1>War Thunder Forum</h1>
-            </div>
-            {SearchComponent(getAllPosts)}
-            <div className="add-post-block">
-                {getUsername()}
-                <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
-            </div>
-            <div id="forAllPosts">
-                {posts.map(post =>
-                    <div key={post.id} className="card post" data-id={post.id}>
-                        <h2> {post.title} </h2>
-                        <h3> {post.content} </h3>
-                        <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
-                        <div className="like-buttons">
-                            <button className="add-like-btn" type="button" onClick={() => AddLikeToPost(post.id)} >Like</button>
-                            <button className="add-dislike-btn" type="button" onClick={() => AddDislikeToPost(post.id)} >Dislike</button>
+                            <div className="post-buttons">
+                                <button className="add-comment-btn" type="button" onClick={() => AddCommentToPost(post.id)} >Add comment</button>
+                                <button className="delete-post-btn" type="button" onClick={() => DeletePostById(post.id)} id={post.id}>Delete this post</button>
+                            </div>
+                            {CommentComponent(post, getAllPosts)}
                         </div>
-                        <div className="comment-input">
-                            <input type="text" className="comment-text" placeholder="Write a new comment:" data-id={"comment-to-" + post.id} />
-                        </div>
-                        
-                        <div className="post-buttons">
-                            <button className="add-comment-btn" type="button" onClick={() => AddCommentToPost(post.id)} >Add comment</button>
-                            <button className="delete-post-btn" type="button" onClick={() => DeletePostById(post.id)} id={post.id}>Delete this post</button>
-                        </div>
-                        {CommentComponent(post, getAllPosts)}
-                        
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div className="page-content cursor_shape">
+                <div className="title">
+                    <h1>War Thunder Forum</h1>
+                </div>
+                <div id="forAllPosts">
+                    {posts.map(post =>
+                        <div key={post.id} className="card post" data-id={post.id}>
+                            <h2> {post.title} </h2>
+                            <h3> {post.content} </h3>
+                            <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
+                            <div className="like-buttons">
+                            </div>
+                            <div className="comment-input">
+                            </div>
+                            <div className="post-buttons">
+                            </div>
+                            {CommentComponent(post, getAllPosts)}
+                        </div>
+                    )}
+                </div>
+            </div>
+        )
+    }
 }

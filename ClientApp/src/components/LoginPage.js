@@ -18,15 +18,11 @@ export function LoginPage(props) {
         let password = document.querySelector("#password").value
 
         let data = {
-            Username : username,
+            Username: username,
             Password: password
         };
         let token = await apiPost(`${baseUrl()}Account/loginUser`, data);
-
-        console.log(token.access_token);
-        console.log(token.expiresAt);
-
-        saveJwtToken(token.access_token, token.expiresAt)
+        saveJwtToken(token["access_token"], token["expiresAt"])
 
         sessionStorage.setItem("name", username);
         props.setUserLoggedIn(true);

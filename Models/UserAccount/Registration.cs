@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace WarThunderForum.Models.User
 {
-    public class RegistrationData
+    public class Registration
     {
         [Required]
         public string Username { get; set; }

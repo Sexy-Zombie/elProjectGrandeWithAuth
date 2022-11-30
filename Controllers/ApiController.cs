@@ -3,12 +3,14 @@ using WarThunderForum.Models;
 using WarThunderForum.Services;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using WarThunderForum.Models.User;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WarThunderForum.Controllers
 {
-    
+
     [ApiController]
     public class ApiController : ControllerBase
     {
@@ -26,8 +28,8 @@ namespace WarThunderForum.Controllers
         {
             return await _service.GetAllPosts();
         }
-        
-        
+
+        [Authorize]
         [HttpPost]
         [Route("[controller]/addPost")]
         public async Task<Post> AddPost([FromBody] Post newPost)
@@ -108,6 +110,7 @@ namespace WarThunderForum.Controllers
             return await _service.GetCommentById(id);
         }
 
+        
         [HttpGet("{word}")]
         [Route("[controller]/getPosts/{word}")]
         public async Task<List<Post>> SearchPostsByWord(string word)

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WarThunderForum.Models
+namespace WarThunderForum.Models.User
 {
     public class User
     {
@@ -9,5 +9,6 @@ namespace WarThunderForum.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
     }
 }

@@ -65,7 +65,7 @@ ul {
 
 .post {
     margin: 1rem;
-    background-color: #6c757dad; /*The whole post background color*/
+    background-color: #6c757de6; /*The whole post background color*/
     width: 1200px;
 
 }
@@ -102,7 +102,8 @@ ul {
 
 .title {
     margin: 4rem 0 5rem;
-    color: #212529;
+    color: #000000;
+    text-shadow: 1px 1px #000000b8
 }
 
 .card-post {
@@ -207,7 +208,7 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 900px;
+    min-height: 47vw;
 }
 
 h2 {
@@ -273,3 +274,12 @@ h5 {
     //cursor: url("./Images/aim.cur"), pointer;
 }
 
+.username-container {
+    background: #e9ecef
+}
+
+.username-container h5{
+    color: black;
+    background: #e9ecef;
+    padding-right: 3rem;
+}

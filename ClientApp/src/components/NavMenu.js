@@ -18,6 +18,13 @@ export function NavMenu(props) {
         props.setUserLoggedIn(false)
         e.preventDefault()
     }
+    function getUsername() {
+        if (sessionStorage.getItem("name")) {
+            return (
+                <h5>Welcome, {sessionStorage.getItem("name")}</h5>
+            )
+        }
+    }
 
     return (
         <>
@@ -45,6 +52,7 @@ export function NavMenu(props) {
                                         <a className="nav-link text-dark" href="/login">Login</a>
                                     </li>
                                 </ul>
+                                
                             </div>
                         </div>
                     </nav>
@@ -69,6 +77,9 @@ export function NavMenu(props) {
                                             <a className="nav-link text-dark logout-nav-button" href="/" onClick={logout}>Log out</a>
                                     </li>
                                 </ul>
+                                <div className="username-container">
+                                    <h2>{getUsername()}</h2>
+                                </div>
                             </div>
                         </div>
                     </nav>

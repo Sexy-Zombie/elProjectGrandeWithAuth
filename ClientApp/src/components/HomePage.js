@@ -67,23 +67,15 @@ export function HomeComponent(props) {
         getAllPosts();
     }
 
-    function getUsername() {
-        if (sessionStorage.getItem("name")) {
-            return (
-                <h5>Welcome, {sessionStorage.getItem("name")}</h5>
-                )
-        }
-    }
+    
     if (props.userLoggedIn == true) {
         return (
             <div className="page-content cursor_shape">
-                <div className="title">
-                    <h1>War Thunder Forum</h1>
-                </div>
-                {SearchComponent(getAllPosts)}
+                
+                
                 <div className="add-post-block">
-                    {getUsername()}
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
+                    {SearchComponent(getAllPosts)}
                 </div>
                 <div id="forAllPosts">
                     {posts.map(post =>
@@ -103,7 +95,7 @@ export function HomeComponent(props) {
                                 <button className="add-comment-btn" type="button" onClick={() => AddCommentToPost(post.id)} >Add comment</button>
                                 <button className="delete-post-btn" type="button" onClick={() => DeletePostById(post.id)} id={post.id}>Delete this post</button>
                             </div>
-                            {CommentComponent(post, getAllPosts)}
+                            {CommentComponent(post, getAllPosts, props.userLoggedIn)}
                         </div>
                     )}
                 </div>
@@ -115,6 +107,7 @@ export function HomeComponent(props) {
                 <div className="title">
                     <h1>War Thunder Forum</h1>
                 </div>
+                {SearchComponent(getAllPosts)}
                 <div id="forAllPosts">
                     {posts.map(post =>
                         <div key={post.id} className="card post" data-id={post.id}>

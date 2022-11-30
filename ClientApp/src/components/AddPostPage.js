@@ -1,7 +1,7 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { baseUrl } from './BaseUrl';
 import { apiPost } from './ApiPost';
-import { authorizedPostFetch } from './Token';
+import { authorizedPostFetch } from './Authentication/authenticationUtils';
 
 export function AddPostPage() {
 

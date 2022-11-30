@@ -4,8 +4,19 @@ import '../index.css'
 
 export function NavMenu(props) {
     function logout(e) {
+        const token = localStorage.getItem("jwt");
+        const nameHeader = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
+        const idHeader = "UserId";
+        const tokenData = JSON.parse(atob(token.split('.')[1]));
+        console.log(tokenData[nameHeader], tokenData[idHeader]);
+
+        JSON.parse(atob(token.split('.')[1]))
+
+
         sessionStorage.removeItem("name")
         props.setUserLoggedIn(false)
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("jwtExpiresAt");
         e.preventDefault()
     }
 

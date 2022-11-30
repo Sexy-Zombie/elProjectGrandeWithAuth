@@ -1,4 +1,4 @@
-﻿namespace WarThunderForum.Models
+﻿namespace WarThunderForum.Models.Entities
 {
     public class Post : BaseModel
     {

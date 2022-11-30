@@ -205,7 +205,8 @@ namespace WarThunderForum.Services
 
             foreach (var post in selectedPosts)
             {
-                List<string> seperatedWords = post.Content.Split(' ');
+                string[] seperatedWords = post.Content.Split(' ');
+
 
                 for (var i = 0; i < seperatedWords.Length; i++)
                 {
@@ -214,6 +215,14 @@ namespace WarThunderForum.Services
                         seperatedWords[i] = "<mark>" + seperatedWords[i] + "</mark>";
                     }
                 }
+
+
+                foreach (var wor in seperatedWords)
+                {
+                    
+                }
+
+
             }
 
             return selectedPosts;

@@ -19,11 +19,13 @@ export function RegistrationPage() {
         let username = document.querySelector("#username").value;
         let email = document.querySelector("#email").value;
         let password = document.querySelector("#password").value;
+        let confirmPassword = document.querySelector("#password-confirm").value
 
         let data = {
             Email: email,
             Username: username,
             Password: password
+            ConfirmPassword: confirmPassword
         };
 
         apiPost(`${baseUrl}Account/createUser`, data)
@@ -56,6 +58,12 @@ export function RegistrationPage() {
                             <label className="control-label">
                                 Password
                                 <input type="password" className="form-control" id="password" required />
+                            </label>
+                        </div>
+                        <div className="form-group">
+                            <label className="control-label">
+                                Confirm password
+                                <input type="password" className="form-control" id="password-confirm" required />
                             </label>
                         </div>
                     </form>

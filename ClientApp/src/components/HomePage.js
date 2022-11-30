@@ -5,7 +5,7 @@ import { CommentComponent } from './CommentComponent';
 import { SearchComponent } from './SearchComponent'
 import { baseUrl } from './BaseUrl';
 import { apiPost } from './ApiPost';
-import { } from './Token';
+import { } from './Authentication/authenticationUtils';
 
 
 export function HomeComponent(props) {
@@ -74,7 +74,7 @@ export function HomeComponent(props) {
                 )
         }
     }
-    if (props.userLoggedIn) {
+    if (props.userLoggedIn == true) {
         return (
             <div className="page-content cursor_shape">
                 <div className="title">

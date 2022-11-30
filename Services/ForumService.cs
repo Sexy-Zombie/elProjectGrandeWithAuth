@@ -193,43 +193,11 @@ namespace WarThunderForum.Services
 
         public async Task<List<Post>> SearchPostsByWord(string word)
         {
-            /*var selectedPosts = await _context.Posts.Where(p => p.Content.Contains(word))
-                .Include(p => p.CommentList).ToListAsync();
-
-            return selectedPosts;*/
-
-            List<Post> searchedPosts = new List<Post>();
-
             var selectedPosts = await _context.Posts.Where(p => p.Content.Contains(word))
                 .Include(p => p.CommentList).ToListAsync();
 
-            foreach (var post in selectedPosts)
-            {
-                string[] seperatedWords = post.Content.Split(' ');
-
-
-                for (var i = 0; i < seperatedWords.Length; i++)
-                {
-                    if (seperatedWords[i].Contains(word))
-                    {
-                        seperatedWords[i] = "<mark>" + seperatedWords[i] + "</mark>";
-                    }
-                }
-
-
-                foreach (var seperatedWord in seperatedWords)
-                {
-                    if (seperatedWord == word)
-                    {
-
-                    }
-                }
-
-
-            }
-
             return selectedPosts;
-
+            
         }
 
     }

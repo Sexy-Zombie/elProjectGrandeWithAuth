@@ -1,6 +1,7 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { baseUrl } from './BaseUrl';
 import { apiPost } from './ApiPost';
+import { authorizedPostFetch } from './Token';
 
 export function AddPostPage() {
 
@@ -20,7 +21,7 @@ export function AddPostPage() {
             commentList: [],
             category: ""
         };
-        await apiPost(`${baseUrl()}api/addPost`, data);
+        await authorizedPostFetch(`${baseUrl()}api/addPost`, data);
         navigate('/');
     }
 

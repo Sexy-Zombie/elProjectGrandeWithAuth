@@ -210,16 +210,19 @@ namespace WarThunderForum.Services
 
                 for (var i = 0; i < seperatedWords.Length; i++)
                 {
-                    if (seperatedWords[i] == word)
+                    if (seperatedWords[i].Contains(word))
                     {
                         seperatedWords[i] = "<mark>" + seperatedWords[i] + "</mark>";
                     }
                 }
 
 
-                foreach (var wor in seperatedWords)
+                foreach (var seperatedWord in seperatedWords)
                 {
-                    
+                    if (seperatedWord == word)
+                    {
+
+                    }
                 }
 
 

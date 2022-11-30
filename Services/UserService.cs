@@ -27,7 +27,7 @@ namespace WarThunderForum.Services
                 Email = registrationData.Email
             };
 
-            user.Password = PasswordHasher.HashPassword(user, registrationData.Password);
+            user.PasswordHash = PasswordHasher.HashPassword(user, registrationData.Password);
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -62,7 +62,7 @@ namespace WarThunderForum.Services
                 return false;
             }
 
-            var result = PasswordHasher.VerifyHashedPassword(user, user.Password, loginData.Password);
+            var result = PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, loginData.Password);
             return result == PasswordVerificationResult.Success;
 
         }

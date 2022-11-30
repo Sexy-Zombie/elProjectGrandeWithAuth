@@ -24,7 +24,7 @@ export function RegistrationPage() {
         let data = {
             Email: email,
             Username: username,
-            Password: password
+            Password: password,
             ConfirmPassword: confirmPassword
         };
 

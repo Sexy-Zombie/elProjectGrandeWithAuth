@@ -7,7 +7,7 @@ import { baseUrl } from './BaseUrl';
 import { apiPost } from './ApiPost';
 
 
-export function PostComponent(posts, getAllPosts, searchedWord) {
+export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
 
     
     async function AddCommentToPost(id) {
@@ -64,7 +64,7 @@ export function PostComponent(posts, getAllPosts, searchedWord) {
                         <button className="add-comment-btn" type="button" onClick={() => AddCommentToPost(post.id)} >Add comment</button>
                         <button className="delete-post-btn" type="button" onClick={() => DeletePostById(post.id)} id={post.id}>Delete this post</button>
                     </div>
-                    {CommentComponent(post, getAllPosts)}
+                    {CommentComponent(post, getAllPosts, userLoggedIn)}
 
                 </div>
             )}

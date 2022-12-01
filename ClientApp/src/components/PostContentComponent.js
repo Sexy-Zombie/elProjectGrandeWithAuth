@@ -11,11 +11,13 @@ export function PostContentComponent(content, searchedWord) {
     let word = [searchedWord];
     
     return (
-        <Highlighter
+        <h3>
+            <Highlighter
             highlightClassName="YourHighlightClass"
             searchWords={word}
             autoEscape={true}
             textToHighlight={content}
-        />
+            />
+        </h3>
     );
 }

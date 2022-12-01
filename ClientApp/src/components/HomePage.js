@@ -58,12 +58,12 @@ export function HomeComponent(props) {
     }
 
     async function AddLikeToPost(id) {
-        await fetch(`${baseUrl()}api/addLikeToPost/${id}`)
+        await fetch(`${baseUrl()}api/addLikeToPost/${id}/${sessionStorage.getItem("name")}`)
         getAllPosts();
     }
 
     async function AddDislikeToPost(id) {
-        await fetch(`${baseUrl()}api/addDislikeToPost/${id}`)
+        await fetch(`${baseUrl()}api/addDislikeToPost/${id}/${sessionStorage.getItem("name")}`)
         getAllPosts();
     }
 
@@ -71,8 +71,9 @@ export function HomeComponent(props) {
     if (props.userLoggedIn == true) {
         return (
             <div className="page-content cursor_shape">
-                
-                
+                <div className="title">
+                    <h1>War Thunder Forum</h1>
+                </div>
                 <div className="add-post-block">
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
                     {SearchComponent(getAllPosts)}

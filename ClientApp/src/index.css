@@ -283,3 +283,7 @@ h5 {
     background: #e9ecef;
     padding-right: 3rem;
 }
+
+.YourHighlightClass {
+    border-radius: 0.5rem;
+}

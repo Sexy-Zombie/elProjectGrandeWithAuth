@@ -4,12 +4,12 @@ import { baseUrl } from './BaseUrl';
 export function CommentComponent(post, getAllPosts, userLoggedIn) {
 
     async function AddLikeToComment(commentId) {
-        await fetch(`${baseUrl()}api/addLikeToComment/${commentId}`)
+        await fetch(`${baseUrl()}api/addLikeToComment/${commentId}/${sessionStorage.getItem("name")}`)
         getAllPosts();
     }
 
     async function AddDislikeToComment(commentId) {
-        await fetch(`${baseUrl()}api/addDislikeToComment/${commentId}`)
+        await fetch(`${baseUrl()}api/addDislikeToComment/${commentId}/${sessionStorage.getItem("name")}`)
         getAllPosts();
     }
 

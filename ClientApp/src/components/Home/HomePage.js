@@ -43,9 +43,9 @@ export function HomeComponent(props) {
                 <div className="title">
                     <h1>War Thunder Forum</h1>
                 </div>
-                {SearchComponent(getAllPosts)}
                 <div className="add-post-block">
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
+                    {SearchComponent(getAllPosts)}
                 </div>
                 {PostComponent(posts, getAllPosts, searchedWord, props.userLoggedIn)}
             </div>

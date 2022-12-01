@@ -40,15 +40,6 @@ export function HomeComponent(props) {
     }
   
 
-    function getUsername() {
-        if (sessionStorage.getItem("name")) {
-            return (
-                <h5>Welcome, {sessionStorage.getItem("name")}</h5>
-                )
-        }
-    }
-
-
     if (props.userLoggedIn == true) {
         return (
             <div className="page-content cursor_shape">

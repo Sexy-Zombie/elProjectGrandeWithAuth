@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { baseUrl } from './BaseUrl';
+import { baseUrl } from '../BaseUrl/BaseUrl';
 
 export function CommentComponent(post, getAllPosts, userLoggedIn) {
 

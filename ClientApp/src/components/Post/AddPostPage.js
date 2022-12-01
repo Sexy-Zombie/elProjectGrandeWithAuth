@@ -1,7 +1,6 @@
 ﻿import { useNavigate } from 'react-router-dom';
-import { baseUrl } from './BaseUrl';
-import { apiPost } from './ApiPost';
-import { authorizedPostFetch } from './Authentication/authenticationUtils';
+import { baseUrl } from '../BaseUrl/BaseUrl';
+import { authorizedPostFetch } from '../Authentication/authenticationUtils';
 
 export function AddPostPage() {
 
@@ -26,20 +25,6 @@ export function AddPostPage() {
         await authorizedPostFetch(`${baseUrl()}api/addPost`, data);
         navigate('/');
     }
-
-
-
-    /*async function apiPost(url, payload) {
-        let data = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        return await data.json()
-    }*/
-
 
 
     return (

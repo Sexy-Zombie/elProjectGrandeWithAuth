@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { baseUrl } from './BaseUrl';
 
 
 export function SearchComponent(getAllPosts) {

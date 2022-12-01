@@ -1,6 +1,6 @@
 ﻿import { useNavigate } from 'react-router-dom';
-import { apiPost } from './ApiPost';
-import { baseUrl } from './BaseUrl';
+import { apiPost } from '../Post/ApiPost';
+import { baseUrl } from '../BaseUrl/BaseUrl';
 
 export function LoginPage(props) {
     const navigate = useNavigate();

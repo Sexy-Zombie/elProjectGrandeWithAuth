@@ -1,9 +1,9 @@
 ﻿import React, { Component, useEffect, useState, useRef } from 'react';
-import '../custom.css'
-import '../index.css'
-import { CommentComponent } from './CommentComponent';
-import { PostContentComponent } from './PostContentComponent';
-import { baseUrl } from './BaseUrl';
+import '../../../src/custom.css'
+import '../../../src/index.css'
+import { CommentComponent } from '../Comment/CommentComponent';
+import { PostContentComponent } from '../Post/PostContentComponent';
+import { baseUrl } from '../BaseUrl/BaseUrl';
 import { apiPost } from './ApiPost';
 
 

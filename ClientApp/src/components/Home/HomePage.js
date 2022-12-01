@@ -1,13 +1,11 @@
 import React, { Component, useEffect, useState, useRef } from 'react';
-import '../custom.css'
-import '../index.css'
-import { CommentComponent } from './CommentComponent';
-import { SearchComponent } from './SearchComponent'
-import { PostComponent } from './PostComponent'
-import { baseUrl } from './BaseUrl';
-import { apiPost } from './ApiPost';
-import Highlighter from "react-highlight-words";
-import { } from './Authentication/authenticationUtils';
+import '../../../src/custom.css'
+import '../../../src/index.css'
+import { CommentComponent } from '../Comment/CommentComponent';
+import { SearchComponent } from '../Search/SearchComponent'
+import { PostComponent } from '../Post/PostComponent'
+import { baseUrl } from '../BaseUrl/BaseUrl';
+import { } from '../Authentication/authenticationUtils';
 
 
 export function HomeComponent(props) {

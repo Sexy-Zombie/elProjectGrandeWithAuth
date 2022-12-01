@@ -1,11 +1,11 @@
 import React, { Component, useEffect, useState, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AddPostPage } from './components/AddPostPage';
-import { HomeComponent } from './components/HomePage';
-import { NavBar } from './components/NavBar';
-import { FooterBar } from './components/FooterBar';
-import { RegistrationPage } from './components/RegistrationPage';
-import { LoginPage } from './components/LoginPage';
+import { AddPostPage } from './components/Post/AddPostPage';
+import { HomeComponent } from './components/Home/HomePage';
+import { NavBar } from './components/NavMenu/NavBar';
+import { FooterBar } from './components/Footer/FooterBar';
+import { RegistrationPage } from './components/Registration/RegistrationPage';
+import { LoginPage } from './components/Login/LoginPage';
 
 function App() {
     const [userLoggedIn, setUserLoggedIn] = useState(false)

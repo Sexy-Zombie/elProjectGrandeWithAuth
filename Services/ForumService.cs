@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Linq;
 using WarThunderForum.Models.User;
+using WarThunderForum.Models.Entities;
 
 namespace WarThunderForum.Services
 {
@@ -51,7 +52,8 @@ namespace WarThunderForum.Services
         public async Task<Post> RemovePost(int id) // called
         {
             var postToRemove = await _context.Posts.Where(p => p.Id == id)
-                .Include(p => p.CommentList).FirstOrDefaultAsync();
+                .Include(p => p.CommentList).Include(p => p.DislikersList).Include(p => p.LikersList).FirstOrDefaultAsync();
+                
 
 
             if (postToRemove.CommentList.Count != 0)
@@ -74,43 +76,56 @@ namespace WarThunderForum.Services
             _context.SaveChanges();
         }
 
-        public async Task UpdatePostLikes(int id, bool like)
+        private User GetUserByUsername(string userName)
         {
-            var selectedPost = await GetPost(id);
-            if (!(selectedPost is null))
+            foreach (var user in _context.Users)
             {
-                if (!like)
+                if (user.Username == userName)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+
+        public async Task UpdatePostLikes(int id, bool like, string userName)
+        {
+            var user = GetUserByUsername(userName);
+            
+            var selectedPost = await GetPost(id);
+            if (!selectedPost.DislikersList.Contains(user) && !like)
+            {
+                selectedPost.DislikersList.Add(user);
+                if (!(selectedPost is null))
                 {
                     selectedPost.DislikeCount++;
                 }
-                else if (like)
+            }
+            else if (selectedPost.DislikersList.Contains(user) && !like)
+            {
+                selectedPost.DislikersList.Remove(user);
+                if (!(selectedPost is null))
+                {
+                    selectedPost.DislikeCount--;
+                }
+            }
+            else if (!selectedPost.LikersList.Contains(user) && like)
+            {
+                selectedPost.LikersList.Add(user);
+                if (!(selectedPost is null))
                 {
                     selectedPost.LikeCount++;
                 }
             }
-            await _context.SaveChangesAsync();
-        }
-
-        public async void UpdateCommentLikes(int postId, int commentId, bool like)
-        {
-            var selectedPost = await GetPost(postId);
-            if (!(selectedPost is null))
+            else if (selectedPost.LikersList.Contains(user) && like)
             {
-                var comment = selectedPost.CommentList.Find(x => x.Id == commentId);
-
-                if (!(comment is null))
+                selectedPost.LikersList.Remove(user);
+                if (!(selectedPost is null))
                 {
-                    if (like)
-                    {
-                        comment.LikeCount++;
-                    }
-                    else if (!like)
-                    {
-                        comment.DislikeCount++;
-                    }
+                    selectedPost.LikeCount--;
                 }
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Comment> AddCommentToPost(AddComment addComment)
@@ -160,26 +175,50 @@ namespace WarThunderForum.Services
 
         public async Task<Comment> DeleteCommentById(int id) 
         {
-            var commentToRemove = await _context.Comments.Where(p => p.Id == id).FirstOrDefaultAsync();
+            var commentToRemove = await _context.Comments.Where(p => p.Id == id).Include(p => p.DislikersList).Include(p => p.LikersList).FirstOrDefaultAsync();
             _context.Comments.Remove(commentToRemove);
             await _context.SaveChangesAsync();
 
             return commentToRemove;
         }
 
-        public async Task UpdateCommentLikes(int id, bool like)
+        public async Task UpdateCommentLikes(int id, bool like, string userName)
         {
+            var user = GetUserByUsername(userName);
             var selectedComment = await _context.Comments.Where(c => c.Id == id).FirstOrDefaultAsync();
-            
-            if (!like)
+
+            if (!selectedComment.DislikersList.Contains(user) && !like)
             {
-                selectedComment.DislikeCount++;
+                selectedComment.DislikersList.Add(user);
+                if (!(selectedComment is null))
+                {
+                    selectedComment.DislikeCount++;
+                }
             }
-            else if (like)
+            else if (selectedComment.DislikersList.Contains(user) && !like)
             {
-                selectedComment.LikeCount++;
+                selectedComment.DislikersList.Remove(user);
+                if (!(selectedComment is null))
+                {
+                    selectedComment.DislikeCount--;
+                }
             }
-            
+            else if (!selectedComment.LikersList.Contains(user) && like)
+            {
+                selectedComment.LikersList.Add(user);
+                if (!(selectedComment is null))
+                {
+                    selectedComment.LikeCount++;
+                }
+            }
+            else if (selectedComment.LikersList.Contains(user) && like)
+            {
+                selectedComment.LikersList.Remove(user);
+                if (!(selectedComment is null))
+                {
+                    selectedComment.LikeCount--;
+                }
+            }
             await _context.SaveChangesAsync();
         }
 
@@ -200,6 +239,5 @@ namespace WarThunderForum.Services
             return selectedPosts;
             
         }
-
     }
 }

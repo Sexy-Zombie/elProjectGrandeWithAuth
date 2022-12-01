@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using WarThunderForum.Models.User;
+using WarThunderForum.Models.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -53,18 +54,18 @@ namespace WarThunderForum.Controllers
 
 
 
-        [HttpPut("{id}")]
-        [Route("[controller]/addLikeToPost/{id}")]
-        public async Task AddLikeToPostById(int id)
+        [HttpPut("{id, userName}")]
+        [Route("[controller]/addLikeToPost/{id}/{userName}")]
+        public async Task AddLikeToPostById(int id, string userName)
         {
-            await _service.UpdatePostLikes(id, true);
+            await _service.UpdatePostLikes(id, true, userName);
         }
 
-        [HttpPut("{id}")]
-        [Route("[controller]/addDislikeToPost/{id}")]
-        public async Task AddDislikeToPostById(int id)
+        [HttpPut("{id, userName}")]
+        [Route("[controller]/addDislikeToPost/{id}/{userName}")]
+        public async Task AddDislikeToPostById(int id, string userName)
         {
-            await _service.UpdatePostLikes(id, false);
+            await _service.UpdatePostLikes(id, false, userName);
         }
 
         [HttpPost]
@@ -89,18 +90,18 @@ namespace WarThunderForum.Controllers
             return await _service.GetAllUsers();
         }
         
-        [HttpPut("{commentId}")]
-        [Route("[controller]/addLikeToComment/{commentId}")]
-        public async Task AddLikeToCommentId(int commentId)
+        [HttpPut("{commentId, userName}")]
+        [Route("[controller]/addLikeToComment/{commentId}/{userName}")]
+        public async Task AddLikeToCommentId(int commentId, string userName)
         {
-            await _service.UpdateCommentLikes(commentId, true);
+            await _service.UpdateCommentLikes(commentId, true, userName);
         }
 
-        [HttpPut("{commentId}")]
-        [Route("[controller]/addDislikeToComment/{commentId}")]
-        public async Task AddDislikeToCommentId(int commentId)
+        [HttpPut("{commentId, userName}")]
+        [Route("[controller]/addDislikeToComment/{commentId}/{userName}")]
+        public async Task AddDislikeToCommentId(int commentId, string userName)
         {
-            await _service.UpdateCommentLikes(commentId, false);
+            await _service.UpdateCommentLikes(commentId, false, userName);
         }
 
         [HttpGet("{id}")]

@@ -1,4 +1,6 @@
-﻿namespace WarThunderForum.Models
+﻿using WarThunderForum.Models.Entities;
+
+namespace WarThunderForum.Models
 {
     public class Forum
     {

@@ -10,7 +10,7 @@ import { LoginPage } from './components/Login/LoginPage';
 function App() {
     const [userLoggedIn, setUserLoggedIn] = useState(false)
     useEffect(() => {
-        if (localStorage.getItem("jwt")) setUserLoggedIn(true)
+        if (sessionStorage.getItem("jwt")) setUserLoggedIn(true)
     })
     return (
         <div>

@@ -45,24 +45,24 @@ export async function requestAccountRegistration(username, email, password, conf
 
 
 export function saveJwtToken(token, expiresAt) {
-    localStorage.setItem("jwt", token);
-    localStorage.setItem("jwtExpiresAt", new Date(expiresAt).toUTCString());
+    sessionStorage.setItem("jwt", token);
+    sessionStorage.setItem("jwtExpiresAt", new Date(expiresAt).toUTCString());
 }
 
 
 export function deleteJwtToken() {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("jwtExpiresAt");
+    sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("jwtExpiresAt");
 }
 
 
 const isLoggedIn = () => {
-    return localStorage.getItem("jwt") !== null;
+    return sessionStorage.getItem("jwt") !== null;
 }
 
 
 export const getJwtToken = () => {
-    return localStorage.getItem("jwt");
+    return sessionStorage.getItem("jwt");
 }
 
 
@@ -73,7 +73,7 @@ export const getUserFromJwt = () => {
 
     const nameHeader = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
     const idHeader = "UserId";
-    const tokenData = parseJwt(localStorage.getItem("jwt"));
+    const tokenData = parseJwt(sessionStorage.getItem("jwt"));
     return { name: tokenData[nameHeader], id: tokenData[idHeader] };
 }
 

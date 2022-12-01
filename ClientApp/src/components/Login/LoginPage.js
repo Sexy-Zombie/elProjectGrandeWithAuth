@@ -7,8 +7,8 @@ export function LoginPage(props) {
 
     
     function saveJwtToken(token, expiresAt) {
-        localStorage.setItem("jwt", token);
-        localStorage.setItem("jwtExpiresAt", new Date(expiresAt).toUTCString());
+        sessionStorage.setItem("jwt", token);
+        sessionStorage.setItem("jwtExpiresAt", new Date(expiresAt).toUTCString());
     }
 
 

@@ -4,7 +4,7 @@ import '../../../src/index.css';
 
 export function NavMenu(props) {
     function logout(e) {
-        const token = localStorage.getItem("jwt");
+        const token = sessionStorage.getItem("jwt");
         /*const nameHeader = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
         const idHeader = "UserId";
         const tokenData = JSON.parse(atob(token.split('.')[1]));*/
@@ -13,8 +13,8 @@ export function NavMenu(props) {
 
 
         sessionStorage.removeItem("name")
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("jwtExpiresAt");
+        sessionStorage.removeItem("jwt");
+        sessionStorage.removeItem("jwtExpiresAt");
         props.setUserLoggedIn(false)
         e.preventDefault()
     }

@@ -78,7 +78,7 @@ export function NavMenu(props) {
                                     </li>
                                 </ul>
                                 <div className="username-container">
-                                    <h2>{getUsername()}</h2>
+                                    {getUsername()}
                                 </div>
                             </div>
                         </div>

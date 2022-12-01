@@ -7,7 +7,6 @@ export function SearchComponent(getAllPosts) {
     async function searchByWord() {
         let field = document.querySelector("#searchField");
         let searchWord = field.value;
-        console.log(searchWord);
 
         if (searchWord == "") {
             getAllPosts();

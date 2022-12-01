@@ -1,5 +1,6 @@
 ﻿using WarThunderForum.Models;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Linq;
@@ -197,6 +198,7 @@ namespace WarThunderForum.Services
                 .Include(p => p.CommentList).ToListAsync();
 
             return selectedPosts;
+            
         }
 
     }

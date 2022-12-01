@@ -20,7 +20,8 @@ export function AddPostPage() {
             disLikeCount: 0,
             commentList: [],
             category: "",
-            actionWithPostUserList: []
+            likersList: [],
+            disLikersList: []
         };
         await authorizedPostFetch(`${baseUrl()}api/addPost`, data);
         navigate('/');

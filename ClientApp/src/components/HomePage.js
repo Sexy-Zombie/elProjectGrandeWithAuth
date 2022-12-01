@@ -7,6 +7,7 @@ import { PostComponent } from './PostComponent'
 import { baseUrl } from './BaseUrl';
 import { apiPost } from './ApiPost';
 import Highlighter from "react-highlight-words";
+import { } from './Authentication/authenticationUtils';
 
 
 export function HomeComponent(props) {
@@ -47,17 +48,49 @@ export function HomeComponent(props) {
         }
     }
 
-    return (
-        <div className="page-content cursor_shape">
-            <div className="title">
-                <h1>War Thunder Forum</h1>
+
+    if (props.userLoggedIn == true) {
+        return (
+            <div className="page-content cursor_shape">
+                <div className="title">
+                    <h1>War Thunder Forum</h1>
+                </div>
+                {SearchComponent(getAllPosts)}
+                <div className="add-post-block">
+                    {getUsername()}
+                    <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
+                </div>
+                {PostComponent(posts, getAllPosts, searchedWord, props.userLoggedIn)}
             </div>
-            {SearchComponent(getAllPosts)}
-            <div className="add-post-block">
-                {getUsername()}
-                <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
+        );
+    }
+    else {
+        return (
+            <div className="page-content cursor_shape">
+                <div className="title">
+                    <h1>War Thunder Forum</h1>
+                </div>
+                {SearchComponent(getAllPosts)}
+                <div id="forAllPosts">
+                    {posts.map(post =>
+                        <div key={post.id} className="card post" data-id={post.id}>
+                            <h2> {post.title} </h2>
+                            <h3> {post.content} </h3>
+                            <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
+                            <div className="like-buttons">
+                            </div>
+                            <div className="comment-input">
+                            </div>
+                            <div className="post-buttons">
+                            </div>
+                            {CommentComponent(post, getAllPosts, props.userLoggedIn)}
+                        </div>
+                    )}
+                </div>
             </div>
-            {PostComponent(posts, getAllPosts, searchedWord)}
-        </div>
-    );
+        )
+
+
+    }
+
 }

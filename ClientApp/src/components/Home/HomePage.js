@@ -31,7 +31,6 @@ export function HomeComponent(props) {
             setWord(word);
             const response = await fetch(`${baseUrl()}api/getPosts/${word}`)
             let actualData = await response.json();
-            
             setPosts(actualData);
         }
         

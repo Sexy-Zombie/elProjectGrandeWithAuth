@@ -12,11 +12,9 @@ export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
     
     async function AddCommentToPost(id) {
 
-        console.log(id);
         let content = document.querySelector(`[data-id="comment-to-${id}"]`);
         let comment = content.value;
         if (comment != "") {
-            console.log(comment);
             content.value = "";
             let data = {
                 Content: comment,
@@ -30,7 +28,6 @@ export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
 
     async function DeletePostById(id) {
         await fetch(`${baseUrl()}api/deletePost/${id}`)
-
         getAllPosts();
     }
 

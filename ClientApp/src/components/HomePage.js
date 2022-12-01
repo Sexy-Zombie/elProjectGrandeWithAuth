@@ -57,7 +57,6 @@ export function HomeComponent(props) {
                 </div>
                 {SearchComponent(getAllPosts)}
                 <div className="add-post-block">
-                    {getUsername()}
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
                 </div>
                 {PostComponent(posts, getAllPosts, searchedWord, props.userLoggedIn)}

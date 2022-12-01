@@ -35,12 +35,12 @@ export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
     }
 
     async function AddLikeToPost(id) {
-        await fetch(`${baseUrl()}api/addLikeToPost/${id}`)
+        await fetch(`${baseUrl()}api/addLikeToPost/${id}/${sessionStorage.getItem('name')}`)
         getAllPosts();
     }
 
     async function AddDislikeToPost(id) {
-        await fetch(`${baseUrl()}api/addDislikeToPost/${id}`)
+        await fetch(`${baseUrl()}api/addDislikeToPost/${id}/${sessionStorage.getItem('name')}`)
         getAllPosts();
     }
 

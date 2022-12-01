@@ -12,6 +12,7 @@ namespace WarThunderForum.Models.Entities
         public string? Content { get; set; }
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
-        public List<User.User> ActionWithPostUserList { get; set; }
+        public List<User.User>? LikersList { get; set; } = new List<User.User>();
+        public List<User.User>? DislikersList { get; set; } = new List<User.User>();
     }
 }

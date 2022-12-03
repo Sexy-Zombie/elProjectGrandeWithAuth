@@ -7,7 +7,7 @@ import { baseUrl } from '../BaseUrl/BaseUrl';
 import { apiPost } from './ApiPost';
 
 
-export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
+export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, userLoggedIn) {
 
     
     async function AddCommentToPost(id) {
@@ -46,7 +46,7 @@ export function PostComponent(posts, getAllPosts, searchedWord, userLoggedIn) {
         <div id="forAllPosts">
             {posts.map(post =>
                 <div key={post.id} className="card post" data-id={post.id}>
-                    <h2> {post.title} </h2>
+                    <h2 onClick={() => navigateToPost(post.id)}> {post.title} </h2>
                     {PostContentComponent(post.content, searchedWord)}
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                     <div className="like-buttons">

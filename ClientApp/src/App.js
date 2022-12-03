@@ -6,12 +6,15 @@ import { NavBar } from './components/NavMenu/NavBar';
 import { FooterBar } from './components/Footer/FooterBar';
 import { RegistrationPage } from './components/Registration/RegistrationPage';
 import { LoginPage } from './components/Login/LoginPage';
+import { SinglePostComponent } from './components/Post/SinglePost';
 
 function App() {
     const [userLoggedIn, setUserLoggedIn] = useState(false)
     useEffect(() => {
         if (sessionStorage.getItem("jwt")) setUserLoggedIn(true)
     })
+
+
     return (
         <div>
             <NavBar {...{ userLoggedIn, setUserLoggedIn }} />
@@ -38,6 +41,11 @@ function App() {
                         path="/login"
                         element={<LoginPage {...{ userLoggedIn, setUserLoggedIn }} />}
                     />
+                    <Route
+                        path="/post/:singlePostId"
+                        element={<SinglePostComponent />}
+                    />
+
                     </Routes>
                 </BrowserRouter>
             <FooterBar></FooterBar> 

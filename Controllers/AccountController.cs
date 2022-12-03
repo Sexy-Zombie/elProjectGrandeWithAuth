@@ -37,7 +37,7 @@ namespace WarThunderForum.Controllers
             {
                 var claims = await _userService.CreateClaims(loginData);
 
-                var expireTime = DateTime.UtcNow.AddHours(6);
+                var expireTime = DateTime.UtcNow.AddHours(1);
 
                 return Ok(new
                 {

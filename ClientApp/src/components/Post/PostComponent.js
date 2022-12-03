@@ -46,7 +46,10 @@ export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, 
         <div id="forAllPosts">
             {posts.map(post =>
                 <div key={post.id} className="card post" data-id={post.id}>
-                    <h2 onClick={() => navigateToPost(post.id)}> {post.title} </h2>
+                    <div className="post-title">
+                        <div><h2> {post.title}</h2></div>
+                        <button className="go-to-post-btn" type="button" onClick={() => navigateToPost(post.id)}>Go to this post</button>
+                    </div>
                     {PostContentComponent(post.content, searchedWord)}
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                     <div className="like-buttons">

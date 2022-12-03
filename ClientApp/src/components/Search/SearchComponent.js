@@ -18,7 +18,7 @@ export function SearchComponent(getAllPosts) {
 
     return (
         <div>
-            <input id ="searchField" type="search" placeholder="Search" />
+            <input id="searchField" type="search" placeholder="Search in content" />
             <button type="button" onClick={() => searchByWord()}>Search</button>
         </div>
         );

@@ -48,7 +48,7 @@ export function SinglePostComponent() {
                     <h1>Post {post.id}</h1>
                 </div>
                 <div className="card post" data-id={post.id}>
-                    <h2>{post.title}</h2>
+                    <h2 className="post-title">{post.title}</h2>
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                     <div className="like-buttons">
                         <button className="add-like-btn" type="button" onClick={() => AddLikeToPost(post.id, getPost)} >Like</button>
@@ -75,7 +75,7 @@ export function SinglePostComponent() {
                     <h1>Post {post.id}</h1>
                 </div>
                 <div className="card post" data-id={post.id}>
-                    <h2>{post.title}</h2>
+                    <h2 className="post-title">{post.title}</h2>
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                     <div className="comments">
                         <h4>Comments</h4>

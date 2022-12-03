@@ -41,6 +41,10 @@ export function HomeComponent(props) {
     async function navigateToPost(id) {
         navigate(`/post/${id}`);
     }
+
+    async function NavigateToUser(id) {
+        navigate(`/user/${id}`);
+    }
   
 
     if (props.userLoggedIn == true) {
@@ -68,6 +72,7 @@ export function HomeComponent(props) {
                     {posts.map(post =>
                         <div key={post.id} className="card post" data-id={post.id}>
                             <div className="post-title">
+                                <h4 className="post-author" onClick={() => NavigateToUser(post.userId)}> By: {post.username}</h4>
                                 <div><h2> {post.title}</h2></div>
                                 <button className="go-to-post-btn" type="button" onClick={() => navigateToPost(post.id)}>Go to this post</button>
                             </div>

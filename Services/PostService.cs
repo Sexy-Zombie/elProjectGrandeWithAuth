@@ -13,7 +13,7 @@ namespace WarThunderForum.Services
             _context = context;
         }
 
-        public async Task<Post> GetPostById(int id)   //(duplicated)  this is in ForumService too
+        public async Task<Post?> GetPostById(int id)   //(duplicated)  this is in ForumService too
         {
 
             return await _context.Posts.Where(p => p.Id == id)

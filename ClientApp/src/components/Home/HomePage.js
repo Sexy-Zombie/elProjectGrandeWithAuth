@@ -1,4 +1,5 @@
-import React, { Component, useEffect, useState, useRef } from 'react';
+import React, { Component, useEffect, useState, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../src/custom.css'
 import '../../../src/index.css'
 import { CommentComponent } from '../Comment/CommentComponent';
@@ -10,6 +11,7 @@ import { } from '../Authentication/authenticationUtils';
 
 export function HomeComponent(props) {
 
+    const navigate = useNavigate();
     let [searchedWord, setWord] = useState("");
     const [posts, setPosts] = useState([]);
 
@@ -35,6 +37,10 @@ export function HomeComponent(props) {
         }
         
     }
+
+    async function navigateToPost(id) {
+        navigate(`/post/${id}`);
+    }
   
 
     if (props.userLoggedIn == true) {
@@ -47,7 +53,7 @@ export function HomeComponent(props) {
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
                     {SearchComponent(getAllPosts)}
                 </div>
-                {PostComponent(posts, getAllPosts, searchedWord, props.userLoggedIn)}
+                {PostComponent(posts, getAllPosts, searchedWord, navigateToPost, props.userLoggedIn)}
             </div>
         );
     }
@@ -61,7 +67,7 @@ export function HomeComponent(props) {
                 <div id="forAllPosts">
                     {posts.map(post =>
                         <div key={post.id} className="card post" data-id={post.id}>
-                            <h2> {post.title} </h2>
+                            <h2 onClick={() => navigateToPost(post.id)}> {post.title} </h2>
                             <h3> {post.content} </h3>
                             <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                             <div className="like-buttons">

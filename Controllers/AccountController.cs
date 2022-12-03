@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WarThunderForum.Services;
 using WarThunderForum.Models.User;
+using WarThunderForum.Models.Entities;
 
 namespace WarThunderForum.Controllers
 {
@@ -14,10 +15,10 @@ namespace WarThunderForum.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserService _userService;
 
-        public AccountController(IConfiguration configuration, UserService serviceService)
+        public AccountController(IConfiguration configuration, UserService userService)
         {
             _configuration = configuration;
-            _userService = serviceService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -68,6 +69,15 @@ namespace WarThunderForum.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
+
+
+        [HttpGet("{id}")]
+        [Route("[controller]/getUser/{id}")]
+        public async Task<User?> GetUserById(int id)
+        {
+            return await _userService.GetUserById(id);
+        }
+
 
     }
 }

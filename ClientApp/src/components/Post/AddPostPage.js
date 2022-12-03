@@ -1,6 +1,6 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../BaseUrl/BaseUrl';
-import { authorizedPostFetch } from '../Authentication/authenticationUtils';
+import { authorizedPostFetch, getUserFromJwt } from '../Authentication/authenticationUtils';
 
 export function AddPostPage() {
 
@@ -10,6 +10,7 @@ export function AddPostPage() {
 
         let title = document.querySelector("#title").value;
         let content = document.querySelector("#content").value;
+        let userData = await getUserFromJwt();
 
         let data = {
             title: title,
@@ -20,7 +21,11 @@ export function AddPostPage() {
             commentList: [],
             category: "",
             likersList: [],
-            disLikersList: []
+            disLikersList: [],
+            username: userData.name,
+            userId: userData.id
+
+
         };
         await authorizedPostFetch(`${baseUrl()}api/addPost`, data);
         navigate('/');

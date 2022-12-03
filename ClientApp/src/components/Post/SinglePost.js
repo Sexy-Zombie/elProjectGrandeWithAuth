@@ -5,7 +5,6 @@ import '../../../src/custom.css'
 import '../../../src/index.css'
 import { CommentComponent } from '../Comment/CommentComponent';
 import { baseUrl } from '../BaseUrl/BaseUrl';
-import { apiPost } from './ApiPost';
 import { AddCommentToPost, AddDislikeToPost, AddLikeToPost, DeletePostById } from '../Functions/Modifiers';
 
 
@@ -34,8 +33,6 @@ export function SinglePostComponent() {
     }
 
 
-    console.log(post);
-
     if (post === undefined) {
         return <>Still loading...</>;
     }
@@ -48,7 +45,11 @@ export function SinglePostComponent() {
                     <h1>Post {post.id}</h1>
                 </div>
                 <div className="card post" data-id={post.id}>
-                    <h2 className="post-title">{post.title}</h2>
+                    <div className="post-title">
+                        <h4 className="post-author"> By: {post.username}</h4>
+                        <div><h2> {post.title}</h2></div>
+                    </div>
+                    <h3>{post.content}</h3>
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                     <div className="like-buttons">
                         <button className="add-like-btn" type="button" onClick={() => AddLikeToPost(post.id, getPost)} >Like</button>
@@ -75,8 +76,12 @@ export function SinglePostComponent() {
                     <h1>Post {post.id}</h1>
                 </div>
                 <div className="card post" data-id={post.id}>
-                    <h2 className="post-title">{post.title}</h2>
+                    <div className="post-title">
+                        <h4 className="post-author"> By: {post.username}</h4>
+                        <div><h2> {post.title}</h2></div>
+                    </div>
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
+                    <h3>{post.content}</h3>
                     <div className="comments">
                         <h4>Comments</h4>
                         {post.commentList.map((comment, index) =>

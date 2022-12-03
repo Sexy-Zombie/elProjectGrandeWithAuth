@@ -1,4 +1,5 @@
 ﻿import React, { Component, useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../src/custom.css'
 import '../../../src/index.css'
 import { CommentComponent } from '../Comment/CommentComponent';
@@ -9,6 +10,7 @@ import { apiPost } from './ApiPost';
 
 export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, userLoggedIn) {
 
+    const navigate = useNavigate();
     
     async function AddCommentToPost(id) {
 
@@ -41,12 +43,17 @@ export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, 
         getAllPosts();
     }
 
+    async function NavigateToUser(id) {
+        navigate(`/user/${id}`);
+    }
+
 
     return (
         <div id="forAllPosts">
             {posts.map(post =>
                 <div key={post.id} className="card post" data-id={post.id}>
                     <div className="post-title">
+                        <h4 className="post-author" onClick={() => NavigateToUser(post.userId)} > By: {post.username}</h4>
                         <div><h2> {post.title}</h2></div>
                         <button className="go-to-post-btn" type="button" onClick={() => navigateToPost(post.id)}>Go to this post</button>
                     </div>

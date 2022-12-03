@@ -42,6 +42,7 @@ builder.Services.AddDbContext<WarThunderContext>(options => options.UseSqlServer
 
 builder.Services.AddTransient<ForumService>();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<PostService>();
 
 
 

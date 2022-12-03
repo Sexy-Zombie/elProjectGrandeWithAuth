@@ -67,5 +67,10 @@ namespace WarThunderForum.Services
 
         }
 
+        public async Task<User?> GetUserById(int userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id  == userId);
+        }
+
     }
 }

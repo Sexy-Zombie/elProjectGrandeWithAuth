@@ -3,21 +3,16 @@ import './NavMenu.css';
 import '../../../src/index.css';
 
 export function NavMenu(props) {
-    function logout(e) {
+    async function logout(e) {
         const token = sessionStorage.getItem("jwt");
-        /*const nameHeader = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-        const idHeader = "UserId";
-        const tokenData = JSON.parse(atob(token.split('.')[1]));*/
 
         JSON.parse(atob(token.split('.')[1]))
-
-
         sessionStorage.removeItem("name")
         sessionStorage.removeItem("jwt");
         sessionStorage.removeItem("jwtExpiresAt");
         props.setUserLoggedIn(false)
-        e.preventDefault()
     }
+
     function getUsername() {
         if (sessionStorage.getItem("name")) {
             return (

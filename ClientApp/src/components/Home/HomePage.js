@@ -47,7 +47,7 @@ export function HomeComponent(props) {
     }
   
 
-    if (props.userLoggedIn == true) {
+    if (sessionStorage.getItem('name') != null) {
         return (
             <div className="page-content cursor_shape">
                 <div className="title">

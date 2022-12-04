@@ -27,7 +27,6 @@ export function UserComponent() {
 
     async function backToHome() {
         navigate('/');
-
     }
 
     
@@ -46,10 +45,10 @@ export function UserComponent() {
     
     return (
         <div className="page-content cursor_shape">
-            <div className="post-title">
-                <h1>User details:</h1>
-            </div>
             <div className="card post">
+                <div className="post-title">
+                    <h1>User details:</h1>
+                </div>
                 <div>
                     <h2> Id: {user.id}</h2>
                     <h2> Username: {user.username}</h2>

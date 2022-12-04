@@ -32,9 +32,25 @@ export function SinglePostComponent() {
         navigate('/');
     }
 
+    async function NavigateToUser(id) {
+        navigate(`/user/${id}`);
+    }
+
+    async function backToHome() {
+        navigate('/');
+    }
+
+
 
     if (post === undefined) {
-        return <>Still loading...</>;
+        return (
+            <div className="page-content cursor_shape">
+                <div className="title">
+                    <h1>Still loading...</h1>
+                </div>
+
+            </div>
+        );
     }
 
 
@@ -46,7 +62,7 @@ export function SinglePostComponent() {
                 </div>
                 <div className="card post" data-id={post.id}>
                     <div className="post-title">
-                        <h4 className="post-author"> By: {post.username}</h4>
+                        <h4 className="post-author" onClick={() => NavigateToUser(post.userId)}> By: {post.username}</h4>
                         <div><h2> {post.title}</h2></div>
                     </div>
                     <h3>{post.content}</h3>
@@ -65,6 +81,7 @@ export function SinglePostComponent() {
 
                     {CommentComponent(post, getPost, true)}
                 </div>
+                <button className="delete-post-btn" type="button" onClick={() => backToHome()}>Back to homepage</button>
             </div>
         );
     }
@@ -77,7 +94,7 @@ export function SinglePostComponent() {
                 </div>
                 <div className="card post" data-id={post.id}>
                     <div className="post-title">
-                        <h4 className="post-author"> By: {post.username}</h4>
+                        <h4 className="post-author"  onClick={() => NavigateToUser(post.userId)}> By: {post.username}</h4>
                         <div><h2> {post.title}</h2></div>
                     </div>
                     <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
@@ -92,6 +109,7 @@ export function SinglePostComponent() {
                         )}
                     </div>
                 </div>
+                <button className="delete-post-btn" type="button" onClick={() => backToHome()}>Back to homepage</button>
             </div>
         );
 

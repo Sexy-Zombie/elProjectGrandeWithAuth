@@ -22,12 +22,19 @@ export function LoginPage(props) {
             Password: password
         };
         let token = await apiPost(`${baseUrl()}Account/loginUser`, data);
-        saveJwtToken(token["access_token"], token["expiresAt"])
 
-        sessionStorage.setItem("name", username);
-        props.setUserLoggedIn(true);
+        if (token.Unauthorized) {
+            alert("Wrong Username or Password!");
+        }
 
-        navigate('/');
+        else {
+            saveJwtToken(token["access_token"], token["expiresAt"])
+
+            sessionStorage.setItem("name", username);
+            props.setUserLoggedIn(true);
+
+            navigate('/');
+        }
     }
 
     return (

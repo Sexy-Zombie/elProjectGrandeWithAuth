@@ -25,9 +25,16 @@ namespace WarThunderForum.Controllers
         [Route("[controller]/createUser/")]
         public async Task<IActionResult> Register([FromBody] Registration registrationData)
         {
-            await _userService.CreateUser(registrationData);
+            if (await _userService.RegistrationIsValid(registrationData))
+            {
+                await _userService.CreateUser(registrationData);
 
-            return Ok();
+                return Ok();
+
+            }
+
+            return Conflict();
+
         }
 
         [HttpPost]

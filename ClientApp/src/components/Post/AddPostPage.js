@@ -12,6 +12,12 @@ export function AddPostPage() {
         let content = document.querySelector("#content").value;
         let userData = await getUserFromJwt();
 
+        if (title == "" || content == "") {
+            alert("Title and Content are needed too");
+
+        }
+
+        else { 
         let data = {
             title: title,
             content: content,
@@ -29,6 +35,8 @@ export function AddPostPage() {
         };
         await authorizedPostFetch(`${baseUrl()}api/addPost`, data);
         navigate('/');
+
+        }
     }
 
 

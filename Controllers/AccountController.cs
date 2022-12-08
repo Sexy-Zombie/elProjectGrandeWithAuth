@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WarThunderForum.Services;
 using WarThunderForum.Models.User;
+using WarThunderForum.Models.Entities;
 
 namespace WarThunderForum.Controllers
 {
@@ -14,19 +15,26 @@ namespace WarThunderForum.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserService _userService;
 
-        public AccountController(IConfiguration configuration, UserService serviceService)
+        public AccountController(IConfiguration configuration, UserService userService)
         {
             _configuration = configuration;
-            _userService = serviceService;
+            _userService = userService;
         }
 
         [HttpPost]
         [Route("[controller]/createUser/")]
         public async Task<IActionResult> Register([FromBody] Registration registrationData)
         {
-            await _userService.CreateUser(registrationData);
+            if (await _userService.RegistrationIsValid(registrationData))
+            {
+                await _userService.CreateUser(registrationData);
 
-            return Ok();
+                return Ok();
+
+            }
+
+            return Conflict();
+
         }
 
         [HttpPost]
@@ -37,7 +45,7 @@ namespace WarThunderForum.Controllers
             {
                 var claims = await _userService.CreateClaims(loginData);
 
-                var expireTime = DateTime.UtcNow.AddHours(6);
+                var expireTime = DateTime.UtcNow.AddHours(1);
 
                 return Ok(new
                 {
@@ -68,6 +76,15 @@ namespace WarThunderForum.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
+
+
+        [HttpGet("{id}")]
+        [Route("[controller]/getUser/{id}")]
+        public async Task<User?> GetUserById(int id)
+        {
+            return await _userService.GetUserById(id);
+        }
+
 
     }
 }

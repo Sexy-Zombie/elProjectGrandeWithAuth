@@ -1,4 +1,5 @@
-import React, { Component, useEffect, useState, useRef } from 'react';
+import React, { Component, useEffect, useState, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../src/custom.css'
 import '../../../src/index.css'
 import { CommentComponent } from '../Comment/CommentComponent';
@@ -10,6 +11,7 @@ import { } from '../Authentication/authenticationUtils';
 
 export function HomeComponent(props) {
 
+    const navigate = useNavigate();
     let [searchedWord, setWord] = useState("");
     const [posts, setPosts] = useState([]);
 
@@ -35,9 +37,17 @@ export function HomeComponent(props) {
         }
         
     }
+
+    async function navigateToPost(id) {
+        navigate(`/post/${id}`);
+    }
+
+    async function NavigateToUser(id) {
+        navigate(`/user/${id}`);
+    }
   
 
-    if (props.userLoggedIn == true) {
+    if (sessionStorage.getItem('name') != null) {
         return (
             <div className="page-content cursor_shape">
                 <div className="title">
@@ -47,7 +57,7 @@ export function HomeComponent(props) {
                     <a href="/add-post"><button className="add-post-btn" type="button">Add post</button></a>
                     {SearchComponent(getAllPosts)}
                 </div>
-                {PostComponent(posts, getAllPosts, searchedWord, props.userLoggedIn)}
+                {PostComponent(posts, getAllPosts, searchedWord, navigateToPost, props.userLoggedIn)}
             </div>
         );
     }
@@ -61,7 +71,11 @@ export function HomeComponent(props) {
                 <div id="forAllPosts">
                     {posts.map(post =>
                         <div key={post.id} className="card post" data-id={post.id}>
-                            <h2> {post.title} </h2>
+                            <div className="post-title">
+                                <h4 className="post-author" onClick={() => NavigateToUser(post.userId)}> By: {post.username}</h4>
+                                <div><h2> {post.title}</h2></div>
+                                <button className="go-to-post-btn" type="button" onClick={() => navigateToPost(post.id)}>Go to this post</button>
+                            </div>
                             <h3> {post.content} </h3>
                             <h6> Likes: {post.likeCount}, Dislikes: {post.dislikeCount}, Comments: {post.commentList.length} </h6>
                             <div className="like-buttons">

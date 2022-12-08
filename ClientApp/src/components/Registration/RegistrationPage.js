@@ -5,6 +5,7 @@ export function RegistrationPage() {
     let baseUrl = "https://localhost:44449/"
     const navigate = useNavigate();
 
+
     async function apiPost(url, payload) {
         let data = await fetch(url, {
             method: 'POST',
@@ -13,9 +14,11 @@ export function RegistrationPage() {
             },
             body: JSON.stringify(payload),
         })
+        return await data
     }
 
-    function registrateUser() {
+
+    async function registrateUser() {
         let username = document.querySelector("#username").value;
         let email = document.querySelector("#email").value;
         let password = document.querySelector("#password").value;
@@ -28,9 +31,21 @@ export function RegistrationPage() {
             ConfirmPassword: confirmPassword
         };
 
-        apiPost(`${baseUrl}Account/createUser`, data)
 
-        navigate('/login');
+        if (username == "" || email == "" || password == "" || confirmPassword == "") {
+            alert("All fields must be filled!");
+        }
+        else {
+            let response = await apiPost(`${baseUrl}Account/createUser`, data)
+
+            if (response.status != 200) {
+                alert("Cannot create a User(invalid datas)!");
+            }
+
+            else {
+                navigate('/login');
+            }
+        }
     }
 
     return (

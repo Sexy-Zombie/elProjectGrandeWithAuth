@@ -21,6 +21,11 @@ namespace WarThunderForum.Services
 
         public async Task CreateUser(Registration registrationData)
         {
+            if (await RegistrationIsValid(registrationData) is false)
+            {
+                throw new ArgumentException("Registration data is invalid.", nameof(registrationData));
+            }
+
             var user = new User()
             {
                 Username = registrationData.Username,
@@ -71,6 +76,21 @@ namespace WarThunderForum.Services
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id  == userId);
         }
+
+        private async Task<User?> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(a => a.Email == email);
+        }
+
+
+
+        public async Task<bool> RegistrationIsValid(Registration registrationData)
+        {
+            return registrationData.Password == registrationData.ConfirmPassword
+                   && await GetUserByUsername(registrationData.Username) is null
+                   && await GetUserByEmail(registrationData.Email) is null;
+        }
+
 
     }
 }

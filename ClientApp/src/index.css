@@ -274,8 +274,6 @@ ul {
     width: 130px;
     height: 35px;
     margin: 0.5rem;
-    background-color: DarkSeaGreen;
-    border-radius: 20px;
     position: absolute;
     right: 5px;
 }
@@ -283,7 +281,6 @@ ul {
 .post-author {
     font-size: 18px;
     margin: 0.5rem;
-    background-color: CadetBlue;
     border-radius: 5px;
     position: absolute;
     left: 5px;
@@ -318,3 +315,11 @@ h5 {
 .YourHighlightClass {
     border-radius: 0.5rem;
 }
+
+.comment-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2rem;
+}
+

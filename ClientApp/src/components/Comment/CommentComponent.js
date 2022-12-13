@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { getUserFromJwt } from '../Authentication/authenticationUtils';
 import { baseUrl } from '../BaseUrl/BaseUrl';
 
 export function CommentComponent(post, getAllPosts, userLoggedIn) {
@@ -13,9 +14,21 @@ export function CommentComponent(post, getAllPosts, userLoggedIn) {
         getAllPosts();
     }
 
+    async function getCommentById(commentId) {
+        let response = await fetch(`https://localhost:44449/api/getComment/${commentId}`)
+        return response.json()
+    }
+
     async function DeleteComment(commentId) {
-        await fetch(`${baseUrl()}api/deleteComment/${commentId}`)
-        getAllPosts();
+        let userData = getUserFromJwt()
+        let comment = await getCommentById(commentId)
+        if (userData.name == comment.author) {
+            await fetch(`${baseUrl()}api/deleteComment/${commentId}`)
+            getAllPosts();
+        } else {
+            alert("You can't delete this comment!")
+        }
+        
     }
     if (userLoggedIn == true) {
         return (
@@ -23,7 +36,7 @@ export function CommentComponent(post, getAllPosts, userLoggedIn) {
                 <h4>Comments</h4>
                 {post.commentList.map((comment, index) =>
                     < div className="comment" key={index} >
-                        <p className="comment-content"> {comment.content} </p>
+                        <div className="comment-content"><h6 className="comment-author">{comment.author}:</h6> <p>{comment.content} </p></div>
                         <p className="comment-like-text">Likes: {comment.likeCount}, Dislikes: {comment.dislikeCount}</p>
                         <div className="comment-btns">
                             <button className="add-comment-like-btn" type="button" onClick={() => AddLikeToComment(comment.id)}>Like</button>

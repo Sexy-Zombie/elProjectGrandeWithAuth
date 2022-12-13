@@ -6,6 +6,7 @@ import { CommentComponent } from '../Comment/CommentComponent';
 import { PostContentComponent } from '../Post/PostContentComponent';
 import { baseUrl } from '../BaseUrl/BaseUrl';
 import { apiPost } from './ApiPost';
+import { getUserFromJwt } from '../Authentication/authenticationUtils';
 
 
 export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, userLoggedIn) {
@@ -13,14 +14,15 @@ export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, 
     const navigate = useNavigate();
     
     async function AddCommentToPost(id) {
-
+        let userData = await getUserFromJwt()
         let content = document.querySelector(`[data-id="comment-to-${id}"]`);
         let comment = content.value;
         if (comment != "") {
             content.value = "";
             let data = {
                 Content: comment,
-                Id: id
+                Id: id,
+                Author: userData.name
             };
             await apiPost(`${baseUrl()}api/addComment`, data);
 

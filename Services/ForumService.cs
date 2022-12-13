@@ -135,7 +135,8 @@ namespace WarThunderForum.Services
             {
                 Content = addComment.Content,
                 LikeCount = 0,
-                DislikeCount = 0
+                DislikeCount = 0,
+                Author  = addComment.Author
             };
 
             var postForComment = await _context.Posts.Where(p => p.Id == addComment.Id).FirstOrDefaultAsync();

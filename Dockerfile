@@ -1,16 +1,20 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
-WORKDIR /App
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /build
 
-# Copy everything
-COPY . ./
-# Restore as distinct layers
+RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
+RUN apt-get install -y nodejs
+
+# copy csproj and restore as distinct layers
+COPY ./*.csproj .
 RUN dotnet restore
-# Build and publish a release
-RUN dotnet publish -c Release -o out
 
+# copy everything else and build app
+COPY . .
+WORKDIR /build
+RUN dotnet publish -c release -o published --no-cache
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /App
-COPY --from=build-env /App/out .
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+WORKDIR /app
+COPY --from=build /build/published ./
+ENTRYPOINT ["dotnet", "react-dotnet-example.dll"]

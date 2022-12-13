@@ -30,6 +30,13 @@ namespace WarThunderForum.Controllers
             return await _service.GetAllPosts();
         }
 
+        [HttpGet("{id}")]
+        [Route("[controller]/getPostById/{id}")]
+        public async Task<Post> GetPostById(int id)
+        {
+            return await _service.GetPost(id);
+        }
+
         [Authorize]
         [HttpPost]
         [Route("[controller]/addPost")]

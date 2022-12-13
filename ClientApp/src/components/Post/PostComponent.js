@@ -30,9 +30,21 @@ export function PostComponent(posts, getAllPosts, searchedWord, navigateToPost, 
         }
     }
 
+    async function getPostById(postId) {
+        let response = await fetch(`https://localhost:44449/api/getPostById/${postId}`)
+        return response.json()
+    }
+
     async function DeletePostById(id) {
-        await fetch(`${baseUrl()}api/deletePost/${id}`)
-        getAllPosts();
+        let userData = getUserFromJwt()
+        let post = await getPostById(id)
+        if (post.username == userData.name) {
+            await fetch(`${baseUrl()}api/deletePost/${id}`)
+            getAllPosts();
+        } else {
+            alert("You can't delete this post!")
+        }
+        
     }
 
     async function AddLikeToPost(id) {

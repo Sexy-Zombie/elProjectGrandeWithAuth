@@ -315,3 +315,11 @@ h5 {
 .YourHighlightClass {
     border-radius: 0.5rem;
 }
+
+.comment-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2rem;
+}
+
